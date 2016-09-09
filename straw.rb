@@ -9,6 +9,14 @@ class Straw
         @sp = 0
         @vars = {}
     end
+
+    attr_reader :st
+    attr_reader :sp
+    attr_reader :vars
+
+    def cst
+        @st[@sp]
+    end
     
     def step
         c = @code.shift
@@ -99,6 +107,7 @@ class Straw
         while @code.length != 0 do
             self.step
         end
+        self
     end
 end
 
@@ -106,14 +115,15 @@ $USAGE = "Straw - String manipulation esolang
 Usage: #{$0} <file>
 Documentation is in README.md"
 
-if not ARGV[0] then
-    puts $USAGE
-    exit 0
+if __FILE__  == $0 then
+    if not ARGV[0] then
+        puts $USAGE
+        exit 0
+    end
+
+    f = File.new ARGV[0], "r:UTF-8"
+    c = f.read
+    f.close
+
+    Straw.new(c).run
 end
-
-f = File.new ARGV[0], "r:UTF-8"
-c = f.read
-f.close
-
-s = Straw.new c
-s.run
