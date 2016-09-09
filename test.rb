@@ -80,8 +80,17 @@ class TestStraw < Test::Unit::TestCase
         assert_equal srun("~:{}+"), ["Hello, World!"]
     end
 
+    def test_reverse
+        assert_equal srun('~"'), ["!dlroW ,olleH"]
+    end
+
     def test_var
         assert_equal srun("~A]"), []
         assert_equal srun("~A]A["), ["Hello, World!"]
+    end
+
+    def test_decimal
+        assert_equal srun("(5)#"), ["", "00000"]
+        assert_equal srun("(00000)$"), ["", "5"]
     end
 end

@@ -31,10 +31,13 @@ Straw have 2 stacks, the first is initialized with an empty string and the secon
 |`!`|Pop two items, push `Y` if the two items are not equal, an empty string otherwise.|
 |`{`|Pop an item and push its first character.|
 |`}`|Pop an item and push it without the first character.|
+|`"`|Pop a string and reverse it.|
 |`/`|Pop `replacement`, `regex` and `string` and push `string` with all matching occurences of `regex` replaced by `replacement`.|
 |`.`|Pop a regex and a string and push `Y` if the regex match the string, an empty string otherwise.|
 |`]`|Pop `var` and a value, set the variable `var` to the value.|
 |`[`|Pop `var` and a push the variable `var`.|
+|`#`|Pop a decimal string, convert it to unary and push it.|
+|`$`|Pop a string and push it length in decimal.|
 
 Any character that isn't a command is pushed on the current stack.
 

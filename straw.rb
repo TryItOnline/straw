@@ -86,6 +86,8 @@ class Straw
             @st[@sp].push @st[@sp].pop[0]
         when "}"
             @st[@sp].push @st[@sp].pop.chars.drop(1).join
+        when '"'
+            @st[@sp].push @st[@sp].pop.reverse
         when "/"
             b = @st[@sp].pop
             a = @st[@sp].pop
@@ -98,6 +100,10 @@ class Straw
             @vars[v] = @st[@sp].pop
         when "["
             @st[@sp].push @vars[@st[@sp].pop]
+        when "#"
+            @st[@sp].push "0" * @st[@sp].pop.to_i
+        when "$"
+            @st[@sp].push @st[@sp].pop.length.to_s
         else
             @st[@sp].push c
         end
