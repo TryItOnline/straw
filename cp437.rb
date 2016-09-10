@@ -22,7 +22,7 @@ class CP437
     end
 end
 
-$USAGE = "CP437 encoder/decoder (currently borked)
+$USAGE = "CP437 encoder/decoder
 Usage: #{$0} {encode|decode} <a> <b>
 Read from <a> and encode or decode into <b>"
 

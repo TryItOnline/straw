@@ -127,4 +127,9 @@ class TestStraw < Test::Unit::TestCase
         assert_equal srun("(Hello World) |"), ["", "(Hello)(World)"]
         assert_equal srun("(Hello World) |&"), ["", "Hello", "World"]
     end
+
+    def test_getel
+        assert_equal srun("(A)(B)(C)(0)\xF3"), ["", "A", "B", "C", "A"]
+        assert_equal srun("(A)(B)(C)(0)\xF2"), ["", "A", "B", "C", "C"]
+    end
 end

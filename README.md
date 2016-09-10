@@ -45,6 +45,9 @@ Straw use the CP437 encoding.
 |`⌠`|Pop `a` and `b`, drop length of `a` characters on `b` and push `b`.|
 |`⌡`|Pop `a` and `b`, take length of `a` characters on `b` and push `b`.|
 |`|`|Pop `a` and `b`, split `b` with `a` and push a string pushing all splitted portions when evaluated.|
+|`¡`|Get the depth of the stack.|
+|`≤`|Pop a string of length n and push the n-th element of the stack (0 = most deep element).|
+|`≥`|Pop a string of length n and push the n-th element of the stack (0 = least deep element).|
 |`_`|Print the stack.|
 
 Any character that isn't a command is pushed on the current stack.
