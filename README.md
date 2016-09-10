@@ -39,6 +39,7 @@ Straw have 2 stacks, the first is initialized with an empty string and the secon
 |`#`|Pop a decimal string, convert it to unary and push it.|
 |`$`|Pop a string and push it length in decimal.|
 |`%`|Pop a string, enclose it in parentheses and push it.|
+|`_`|Print the stack.|
 
 Any character that isn't a command is pushed on the current stack.
 
@@ -46,3 +47,4 @@ Any character that isn't a command is pushed on the current stack.
 
 * `hello_world.str`: A hello world
 * `truth_machine.str`: A truth machine
+* `quine.str`: A quine

@@ -116,6 +116,8 @@ class Straw
             @st[@sp].push @st[@sp].pop.length.to_s
         when "%"
             @st[@sp].push "(" + @st[@sp].pop + ")"
+        when "_"
+            puts @st.inspect
         else
             @st[@sp].push c
         end
