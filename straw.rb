@@ -192,7 +192,6 @@ if __FILE__  == $0 then
     f = File.new ARGV[0], "r:ASCII-8BIT"
     c = f.read
     f.close
-    c = CP437.decode c.chars.map {|x| x.ord}.to_a
 
     Straw.new(c).run
 end
