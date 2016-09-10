@@ -1,6 +1,14 @@
 #!/usr/bin/env ruby
 
+require_relative "cp437"
+
 require "readline"
+
+def straw_escape(s)
+    s = s.gsub("`", "``")
+         .gsub("(", "`(")
+         .gsub(")", "`)")
+end
 
 class Straw
     def initialize(code, virtualout=false)
@@ -116,6 +124,36 @@ class Straw
             @st[@sp].push @st[@sp].pop.length.to_s
         when "%"
             @st[@sp].push "(" + @st[@sp].pop + ")"
+        when "@"
+            # Pop a mask and a string
+            # Mask the string. For example:
+            #  Mask: 0001000
+            #  String: ABCDEFG
+            #  Result: D
+            # Push the result
+            m = @st[@sp].pop
+            s = @st[@sp].pop
+            s_ = ""
+            m.chars.zip(s.chars).each {|a, b|
+                if a == "1" then
+                    s_ += b
+                end
+            }
+            @st[@sp].push s_
+        when "\xF4"
+            a = @st[@sp].pop
+            b = @st[@sp].pop
+            @st[@sp].push b.chars.drop(a.length).join
+        when "\xF5"
+            a = @st[@sp].pop
+            b = @st[@sp].pop
+            @st[@sp].push b.chars.take(a.length).join
+        when "|"
+            a = @st[@sp].pop
+            b = @st[@sp].pop
+            l = b.split a
+            s = l.map {|e| "(" + straw_escape(e) + ")"}.join
+            @st[@sp].push s
         when "_"
             puts @st.inspect
         else
@@ -138,12 +176,13 @@ Documentation is in README.md"
 if __FILE__  == $0 then
     if not ARGV[0] then
         puts $USAGE
-        exit 0
+        exit 1
     end
 
-    f = File.new ARGV[0], "r:UTF-8"
+    f = File.new ARGV[0], "r:ASCII-8BIT"
     c = f.read
     f.close
+    c = CP437.decode c.chars.map {|x| x.ord}.to_a
 
     Straw.new(c).run
 end

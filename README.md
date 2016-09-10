@@ -10,6 +10,8 @@ String manipulation esolang
 
 Straw have 2 stacks, the first is initialized with an empty string and the second with `Hello, World!`.
 
+Straw use the CP437 encoding.
+
 ### Commands
 
 |Command|Description|
@@ -39,6 +41,10 @@ Straw have 2 stacks, the first is initialized with an empty string and the secon
 |`#`|Pop a decimal string, convert it to unary and push it.|
 |`$`|Pop a string and push it length in decimal.|
 |`%`|Pop a string, enclose it in parentheses and push it.|
+|`@`|See the source code for a description.|
+|`⌠`|Pop `a` and `b`, drop length of `a` characters on `b` and push `b`.|
+|`⌡`|Pop `a` and `b`, take length of `a` characters on `b` and push `b`.|
+|`|`|Pop `a` and `b`, split `b` with `a` and push a string pushing all splitted portions when evaluated.|
 |`_`|Print the stack.|
 
 Any character that isn't a command is pushed on the current stack.

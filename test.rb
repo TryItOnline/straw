@@ -3,13 +3,29 @@
 # Unit tests
 
 require_relative "straw"
+require_relative "cp437"
+
 require "test/unit"
 
 def srun(code)
     Straw.new(code).run.cst
 end
 
+class TestCP437 < Test::Unit::TestCase
+    def test_decode
+        assert_equal CP437.decode([0xE0, 0x62]), "αb"
+    end
+
+    def test_encode
+        assert_equal CP437.encode("αb"), [0xE0, 0x62]
+    end
+end
+
 class TestStraw < Test::Unit::TestCase
+    def test_straw_escape
+        assert_equal straw_escape("(Hello`)"), "`(Hello```)"
+    end
+
     def test_stackinit
         assert_equal srun(""), [""]
         assert_equal srun("~"), ["Hello, World!"]
@@ -96,5 +112,19 @@ class TestStraw < Test::Unit::TestCase
 
     def test_enc
         assert_equal srun("(Hello)%"), ["", "(Hello)"]
+    end
+
+    def test_mask
+        assert_equal srun("(Hello)(10110)@"), ["", "Hll"]
+    end
+
+    def test_td
+        assert_equal srun("~5#\xF4"), [", World!"]
+        assert_equal srun("~5#\xF5"), ["Hello"]
+    end
+
+    def test_split
+        assert_equal srun("(Hello World) |"), ["", "(Hello)(World)"]
+        assert_equal srun("(Hello World) |&"), ["", "Hello", "World"]
     end
 end
