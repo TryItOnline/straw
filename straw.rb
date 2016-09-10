@@ -31,6 +31,7 @@ class Straw
     
     def step
         c = @code.shift
+        c = String.new(c, encoding: "UTF-8")
         case c
         when "("
             s = ""
