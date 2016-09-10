@@ -38,6 +38,7 @@ Straw have 2 stacks, the first is initialized with an empty string and the secon
 |`[`|Pop `var` and a push the variable `var`.|
 |`#`|Pop a decimal string, convert it to unary and push it.|
 |`$`|Pop a string and push it length in decimal.|
+|`%`|Pop a string, enclose it in parenthesis and push it.|
 
 Any character that isn't a command is pushed on the current stack.
 

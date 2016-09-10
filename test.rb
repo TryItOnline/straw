@@ -93,4 +93,8 @@ class TestStraw < Test::Unit::TestCase
         assert_equal srun("(5)#"), ["", "00000"]
         assert_equal srun("(00000)$"), ["", "5"]
     end
+
+    def test_enc
+        assert_equal srun("(Hello)%"), ["", "(Hello)"]
+    end
 end

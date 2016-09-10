@@ -3,16 +3,19 @@
 require "readline"
 
 class Straw
-    def initialize(code)
+    def initialize(code, virtualout=false)
         @code = code.chars
         @st = [[""], ["Hello, World!"]]
         @sp = 0
         @vars = {}
+        @output = ""
+        @vout = virtualout
     end
 
     attr_reader :st
     attr_reader :sp
     attr_reader :vars
+    attr_reader :output
 
     def cst
         @st[@sp]
@@ -25,6 +28,9 @@ class Straw
             s = ""
             l = 0
             loop do
+                if @code.length == 0 then
+                    break
+                end
                 c = @code.shift
                 if c == "(" then
                     l += 1
@@ -62,7 +68,11 @@ class Straw
         when "-"
             @st[@sp].push @st[@sp^1].pop
         when ">"
-            STDOUT.write @st[@sp].pop.to_s
+            if @vout then
+                @output += @st[@sp].pop.to_s
+            else
+                STDOUT.write @st[@sp].pop.to_s
+            end
         when "<"
             @st[@sp].push Readline.readline
         when "?"
@@ -104,6 +114,8 @@ class Straw
             @st[@sp].push "0" * @st[@sp].pop.to_i
         when "$"
             @st[@sp].push @st[@sp].pop.length.to_s
+        when "%"
+            @st[@sp].push "(" + @st[@sp].pop + ")"
         else
             @st[@sp].push c
         end
