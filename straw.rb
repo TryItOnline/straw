@@ -154,10 +154,16 @@ class Straw
             l = b.split a
             s = l.map {|e| "(" + straw_escape(e) + ")"}.join
             @st[@sp].push s
+        when "\xAD"
+            @st[@sp].push "0" * @st[@sp].length
         when "\xF3"
             @st[@sp].push @st[@sp][@st[@sp].pop.length]
         when "\xF2"
             @st[@sp].push @st[@sp][@st[@sp].length - 1 - @st[@sp].pop.length]
+        when "\xF6"
+            a = @st[@sp].pop
+            b = @st[@sp].pop
+            @st[@sp].push "0" * (b.length / a.length)
         when "_"
             puts @st.inspect
         else

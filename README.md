@@ -48,6 +48,7 @@ Straw use the CP437 encoding.
 |`¡`|Get the depth of the stack.|
 |`≤`|Pop a string of length n and push the n-th element of the stack (0 = most deep element).|
 |`≥`|Pop a string of length n and push the n-th element of the stack (0 = least deep element).|
+|`÷`|Pop `a` and `b` and push `b` / `a` (unary arithmetic).|
 |`_`|Print the stack.|
 
 Any character that isn't a command is pushed on the current stack.
