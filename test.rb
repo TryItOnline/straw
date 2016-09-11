@@ -57,8 +57,10 @@ class TestStraw < Test::Unit::TestCase
     end
 
     def test_unarith
-        assert_equal srun("(000000)(00)\xF6"), ["", "000"]
-        assert_equal srun("(00000):+(000)\xF6"), ["", "000"]
+        assert_equal srun("(000000)(00)÷"), ["", "000"]
+        assert_equal srun("(00000):+(000)÷"), ["", "000"]
+        assert_equal srun("(000000)(00)¥"), ["", ""]
+        assert_equal srun("(00000):+(000)¥"), ["", "0"]
     end
 
     def test_stacktoggle
@@ -124,8 +126,8 @@ class TestStraw < Test::Unit::TestCase
     end
 
     def test_td
-        assert_equal srun("~5#\xF4"), [", World!"]
-        assert_equal srun("~5#\xF5"), ["Hello"]
+        assert_equal srun("~5#⌠"), [", World!"]
+        assert_equal srun("~5#⌡"), ["Hello"]
     end
 
     def test_split
@@ -134,11 +136,11 @@ class TestStraw < Test::Unit::TestCase
     end
 
     def test_depth
-        assert_equal srun("-\xAD"), ["", "Hello, World!", "00"]
+        assert_equal srun("-¡"), ["", "Hello, World!", "00"]
     end
 
     def test_getel
-        assert_equal srun("(A)(B)(C)(0)\xF3"), ["", "A", "B", "C", "A"]
-        assert_equal srun("(A)(B)(C)(0)\xF2"), ["", "A", "B", "C", "C"]
+        assert_equal srun("(A)(B)(C)(0)≤"), ["", "A", "B", "C", "A"]
+        assert_equal srun("(A)(B)(C)(0)≥"), ["", "A", "B", "C", "C"]
     end
 end

@@ -31,7 +31,6 @@ class Straw
     
     def step
         c = @code.shift
-        c = String.new(c, encoding: "UTF-8")
         case c
         when "("
             s = ""
@@ -141,11 +140,11 @@ class Straw
                 end
             }
             @st[@sp].push s_
-        when "\xF4"
+        when "⌠"
             a = @st[@sp].pop
             b = @st[@sp].pop
             @st[@sp].push b.chars.drop(a.length).join
-        when "\xF5"
+        when "⌡"
             a = @st[@sp].pop
             b = @st[@sp].pop
             @st[@sp].push b.chars.take(a.length).join
@@ -155,16 +154,20 @@ class Straw
             l = b.split a
             s = l.map {|e| "(" + straw_escape(e) + ")"}.join
             @st[@sp].push s
-        when "\xAD"
+        when "¡"
             @st[@sp].push "0" * @st[@sp].length
-        when "\xF3"
+        when "≤"
             @st[@sp].push @st[@sp][@st[@sp].pop.length]
-        when "\xF2"
+        when "≥"
             @st[@sp].push @st[@sp][@st[@sp].length - 1 - @st[@sp].pop.length]
-        when "\xF6"
+        when "÷"
             a = @st[@sp].pop
             b = @st[@sp].pop
             @st[@sp].push "0" * (b.length / a.length)
+        when "¥"
+            a = @st[@sp].pop
+            b = @st[@sp].pop
+            @st[@sp].push "0" * (b.length % a.length)
         when "_"
             puts @st.inspect
         else
@@ -193,6 +196,7 @@ if __FILE__  == $0 then
     f = File.new ARGV[0], "r:ASCII-8BIT"
     c = f.read
     f.close
+    c = CP437.decode(c.chars.map {|x| x.ord})
 
     Straw.new(c).run
 end
