@@ -4,7 +4,7 @@ String manipulation esolang
 
 ## Usage
 
-    straw.rb <file>
+    straw.rb <file> [-u]
 
 ## Reference
 

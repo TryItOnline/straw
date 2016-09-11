@@ -184,7 +184,9 @@ class Straw
 end
 
 $USAGE = "Straw - String manipulation esolang
-Usage: #{$0} <file>
+Usage: #{$0} <file> [-u]
+Options
+\t-u\tAssume the file is already CP437 decoded
 Documentation is in README.md"
 
 if __FILE__  == $0 then
@@ -193,10 +195,16 @@ if __FILE__  == $0 then
         exit 1
     end
 
-    f = File.new ARGV[0], "r:ASCII-8BIT"
+    if ARGV[1] == "-u" then
+        f = File.new ARGV[0], "r:UTF-8"
+    else
+        f = File.new ARGV[0], "r:ASCII-8BIT"
+    end
     c = f.read
     f.close
-    c = CP437.decode(c.chars.map {|x| x.ord})
+    if ARGV[1] != "-u" then
+        c = CP437.decode(c.chars.map {|x| x.ord})
+    end
 
     Straw.new(c).run
 end
