@@ -8,7 +8,10 @@ String manipulation esolang
 
 ## Reference
 
-Straw have 2 stacks, the first is initialized with an empty string and the second with `Hello, World!`.
+Straw have 3 stacks:
+
+* Two main stacks (the first is initialized with an empty string and the second with `Hello, World!`)
+* One temporary stack
 
 Straw use the CP437 encoding.
 
@@ -50,6 +53,13 @@ Straw use the CP437 encoding.
 |`≥`|Pop a string of length n and push the n-th element of the stack (0 = least deep element).|
 |`÷`|Pop `a` and `b` and push `b` / `a` (unary arithmetic).|
 |`¥`|Pop `a` and `b` and push `b` mod `a` (unary arithmetic).|
+|`æ`|Pop a character and push its CP437 ordinal.|
+|`Æ`|Pop a number and push the CP437 character associated.|
+|`ñ`|Pop an item and push it on the temporary stack.|
+|`Ñ`|Pop an item on the temporary stack and push it on the main stack.|
+|`≈`|Swap the current stack and the temporary one.|
+|`σ`|Clear the temporary stack.|
+|`¢`|Pop a list of list and a string, and for each element in the list, replace the first element (regex) by the second in the string.|
 |`_`|Print the stack.|
 
 Any character that isn't a command is pushed on the current stack.

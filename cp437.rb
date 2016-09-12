@@ -5,6 +5,14 @@ class CP437
         + "ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº¿⌐¬½¼¡«»"\
         + "░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xA0"
     
+    def self.chr(n)
+        @@codepage[n]
+    end
+
+    def self.ord(c)
+        @@codepage.index(c)
+    end
+
     def self.decode(s)
         s_ = ""
         s.each {|c|

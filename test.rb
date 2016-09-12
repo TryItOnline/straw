@@ -140,7 +140,29 @@ class TestStraw < Test::Unit::TestCase
     end
 
     def test_getel
-        assert_equal srun("(A)(B)(C)(0)≤"), ["", "A", "B", "C", "A"]
-        assert_equal srun("(A)(B)(C)(0)≥"), ["", "A", "B", "C", "C"]
+        assert_equal srun("ABC0≤"), ["", "A", "B", "C", "A"]
+        assert_equal srun("ABC0≥"), ["", "A", "B", "C", "C"]
+    end
+
+    def test_chr
+        assert_equal srun("(A)æ"), ["", "0"*65]
+        assert_equal srun("(≈)æ"), ["", "0"*247]
+
+        assert_equal srun("(65)#Æ"), ["", "A"]
+        assert_equal srun("(247)#Æ"), ["", "≈"]
+    end
+
+    def test_tst
+        assert_equal srun("-ñ"), [""]
+        assert_equal srun("-ñÑ"), ["", "Hello, World!"]
+
+        assert_equal srun("≈"), []
+        assert_equal srun("≈-≈Ñ"), ["", "Hello, World!"]
+
+        assert_equal srun("-ñσ≈"), []
+    end
+
+    def test_replace
+        assert_equal srun("(Hello)(((l(.))(He))((i\\1)(Ha)))¢"), ["", "Hailo"]
     end
 end

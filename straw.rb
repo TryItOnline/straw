@@ -11,13 +11,12 @@ def straw_escape(s)
 end
 
 class Straw
-    def initialize(code, virtualout=false)
+    def initialize(code)
         @code = code.chars
         @st = [[""], ["Hello, World!"]]
+        @tst = []
         @sp = 0
         @vars = {}
-        @output = ""
-        @vout = virtualout
     end
 
     attr_reader :st
@@ -76,11 +75,7 @@ class Straw
         when "-"
             @st[@sp].push @st[@sp^1].pop
         when ">"
-            if @vout then
-                @output += @st[@sp].pop.to_s
-            else
-                STDOUT.write @st[@sp].pop.to_s
-            end
+            STDOUT.write @st[@sp].pop.to_s
         when "<"
             @st[@sp].push Readline.readline
         when "?"
@@ -168,8 +163,32 @@ class Straw
             a = @st[@sp].pop
             b = @st[@sp].pop
             @st[@sp].push "0" * (b.length % a.length)
+        when "æ"
+            @st[@sp].push "0" * CP437.ord(@st[@sp].pop)
+        when "Æ"
+            @st[@sp].push CP437.chr(@st[@sp].pop.length)
+        when "ñ"
+            @tst.push @st[@sp].pop
+        when "Ñ"
+            @st[@sp].push @tst.pop
+        when "≈"
+            tmp = @st[@sp]
+            @st[@sp] = @tst
+            @tst = tmp
+        when "σ"
+            @tst.clear
+        when "¢"
+            l = @st[@sp].pop
+            s = @st[@sp].pop
+            _, a, b = Straw.new(l).run.st[0]
+            a = Straw.new(a).run.st[0].drop(1)
+            b = Straw.new(b).run.st[0].drop(1)
+            a.zip(b).each {|x, y|
+                s = s.gsub(Regexp.new(x), y)
+            }
+            @st[@sp].push s
         when "_"
-            puts @st.inspect
+            STDERR.write @st.inspect + "\n"
         else
             @st[@sp].push c
         end
