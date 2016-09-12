@@ -2,7 +2,7 @@
 
 require_relative "cp437"
 
-require "readline"
+#require "readline"
 
 def straw_escape(s)
     s = s.gsub("`", "``")
@@ -77,7 +77,8 @@ class Straw
         when ">"
             STDOUT.write @st[@sp].pop.to_s
         when "<"
-            @st[@sp].push Readline.readline
+            #@st[@sp].push Readline.readline
+            @st[@sp].push STDIN.readline.chomp
         when "?"
             if Kernel.rand < 0.5 then
                 @code.shift
