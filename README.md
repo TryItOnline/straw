@@ -6,6 +6,8 @@ String manipulation esolang
 
     straw.rb <file> [-u]
 
+The `-u` flag is to directly read the file in UTF-8, without CP437 decoding it.
+
 ## Reference
 
 Straw have 3 stacks:
