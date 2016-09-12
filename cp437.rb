@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby --encoding=UTF-8
 
 class CP437
     @@codepage = (0..0x7F).map {|e| e.chr}.to_a.join\
