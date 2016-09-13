@@ -15,7 +15,7 @@ Straw have 3 stacks:
 * Two main stacks (the first is initialized with an empty string and the second with `Hello, World!`)
 * One temporary stack
 
-Straw use the CP437 encoding.
+Straw use a modified CP437 encoding (FF is `…`).
 
 ### Commands
 
@@ -62,6 +62,8 @@ Straw use the CP437 encoding.
 |`≈`|Swap the current stack and the temporary one.|
 |`σ`|Clear the temporary stack.|
 |`¢`|Pop a list of list and a string, and for each element in the list, replace the first element (regex) by the second in the string.|
+|`«`|Pop a string, sum the CP437 codepoints of each character in the string and push an unary number.|
+|`»`|Pop a string and push it length encoded in CP437 codepoints.|
 |`_`|Print the stack.|
 
 Any character that isn't a command is pushed on the current stack.

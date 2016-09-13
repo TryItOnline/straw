@@ -165,4 +165,13 @@ class TestStraw < Test::Unit::TestCase
     def test_replace
         assert_equal srun("(Hello)(((l(.))(He))((i\\1)(Ha)))¢"), ["", "Hailo"]
     end
+
+    def test_ed_number
+        assert_equal srun("(A)«"), ["", "0"*65]
+        assert_equal srun("(Æ)«"), ["", "0"*146]
+        assert_equal srun("(AÆ)«"), ["", "0"*211]
+
+        assert_equal srun("(65)#»:«"), ["", "A", "0"*65]
+        assert_equal srun("(500)#»:«"), ["", "…⌡", "0"*500]
+    end
 end

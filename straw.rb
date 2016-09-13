@@ -188,6 +188,26 @@ class Straw
                 s = s.gsub(Regexp.new(x), y)
             }
             @st[@sp].push s
+        when "«"
+            s = @st[@sp].pop
+            n = 0
+            s.chars.each {|c|
+                n += CP437.ord c
+            }
+            @st[@sp].push "0" * n
+        when "»"
+            n = @st[@sp].pop.length
+            s = ""
+            while n != 0 do
+                if n > 255 then
+                    s += CP437.chr 255
+                    n -= 255
+                else
+                    s += CP437.chr n
+                    break
+                end
+            end
+            @st[@sp].push s
         when "_"
             STDERR.write @st.inspect + "\n"
         else
