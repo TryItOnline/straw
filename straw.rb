@@ -208,6 +208,11 @@ class Straw
                 end
             end
             @st[@sp].push s
+        when "Ω"
+            a = @st[@sp].pop
+            b = @st[@sp].pop
+            b = Straw.new(b).run.st[0].drop(1)
+            @st[@sp].push b.join(a)
         when "_"
             STDERR.write @st.inspect + "\n"
         else

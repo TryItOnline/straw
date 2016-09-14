@@ -174,4 +174,8 @@ class TestStraw < Test::Unit::TestCase
         assert_equal srun("(65)#»:«"), ["", "A", "0"*65]
         assert_equal srun("(500)#»:«"), ["", "…⌡", "0"*500]
     end
+
+    def test_join
+        assert_equal srun("((Hello)(World)) Ω"), ["", "Hello World"]
+    end
 end

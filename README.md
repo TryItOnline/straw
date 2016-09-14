@@ -64,6 +64,7 @@ Straw use a modified CP437 encoding (FF is `…`).
 |`¢`|Pop a list of list and a string, and for each element in the list, replace the first element (regex) by the second in the string.|
 |`«`|Pop a string, sum the CP437 codepoints of each character in the string and push an unary number.|
 |`»`|Pop a string and push it length encoded in CP437 codepoints.|
+|`Ω`|Pop `a` and `b` and push `b` joined with `a`|
 |`_`|Print the stack.|
 
 Any character that isn't a command is pushed on the current stack.
