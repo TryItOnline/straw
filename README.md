@@ -64,8 +64,11 @@ Straw use a modified CP437 encoding (FF is `…`).
 |`¢`|Pop a list of list and a string, and for each element in the list, replace the first element (regex) by the second in the string.|
 |`«`|Pop a string, sum the CP437 codepoints of each character in the string and push an unary number.|
 |`»`|Pop a string and push it length encoded in CP437 codepoints.|
-|`Ω`|Pop `a` and `b` and push `b` joined with `a`|
+|`Ω`|Pop `a` and `b` and push `b` joined with `a`.|
+|`£`|Pop a string and evaluate it while peeking the top of the stack is not an empty string.|
 |`_`|Print the stack.|
+
+There is also a special command, `Ђ`, which should'nt be used directly in the code. (Anyway, it can't be in a source file without the Unicode mode.)
 
 Any character that isn't a command is pushed on the current stack.
 

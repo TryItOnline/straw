@@ -178,4 +178,8 @@ class TestStraw < Test::Unit::TestCase
     def test_join
         assert_equal srun("((Hello)(World)) Ω"), ["", "Hello World"]
     end
+
+    def test_loop
+        assert_equal srun("()(000)(},1+,)£;"), ["", "111"]
+    end
 end

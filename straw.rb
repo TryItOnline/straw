@@ -15,6 +15,7 @@ class Straw
         @code = code.chars
         @st = [[""], ["Hello, World!"]]
         @tst = []
+        @lst = []
         @sp = 0
         @vars = {}
     end
@@ -213,6 +214,17 @@ class Straw
             b = @st[@sp].pop
             b = Straw.new(b).run.st[0].drop(1)
             @st[@sp].push b.join(a)
+        when "£"
+            @lst.push @st[@sp].pop
+            @code.unshift "Ђ"
+        when "Ђ"
+            l = @lst.last
+            if @st[@sp].last.length != 0 then
+                @code.unshift "Ђ"
+                @code = l.chars + @code
+            else
+                @lst.pop
+            end
         when "_"
             STDERR.write @st.inspect + "\n"
         else
